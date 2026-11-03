@@ -1,0 +1,20 @@
+.contact-info-table {
+  td {
+    border-bottom: 1px dashed #dfdfe0;
+    border-top: none;
+    padding-left: 0;
+    padding-right: 10px;
+
+    + td {
+      padding-right: 0;
+      text-align: right;
+    }
+  }
+}
+
+
+@include md {
+  .contact-map.mt-70 {
+    margin-top: 10px;
+  }
+}

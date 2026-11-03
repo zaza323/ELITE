@@ -1,0 +1,16 @@
+.widget {
+  .newsletter-form {
+    position: relative;
+
+   .form-icon {
+     position: absolute;
+     left: 20px;
+     top: 19px;
+   }
+
+   .form-control {
+     padding-left: 50px;
+     padding-right: 20px;
+   }
+  }
+}

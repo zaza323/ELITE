@@ -1,0 +1,60 @@
+.skill-wrap1 {
+  padding: 60px 100px 25px 100px;
+  border-radius: 0 0 100px 100px;
+  box-shadow: 0px 5px 120px 0px rgba(39, 71, 125, 0.15);
+}
+
+.skill-box {
+  max-width: 310px;
+
+  .ripple-icon {
+    &:after,
+    &:before {
+      animation: ripple-xs 4s infinite ease-in-out;
+    }
+  }
+}
+
+
+
+@include ml {
+  .skill-wrap1 {
+    padding: 40px 60px 15px 60px;
+  }
+}
+
+
+@include  lg {
+  .d-xl-flex.skill-box .ripple-icon.mr-20 {
+    margin-right: 0;
+  }
+
+  .skill-box {
+    max-width: 250px;
+
+    &.text-xl-start {
+      .mr-30 {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@include  md {
+  .skill-box {
+    max-width: 100%;
+
+    .text-xl-start {
+      .mr-30 {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@include xs {
+  .skill-wrap1 {
+    border-radius: 0;
+    padding: 40px 20px 15px 20px;
+  }
+}

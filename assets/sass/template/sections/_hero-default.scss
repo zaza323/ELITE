@@ -1,0 +1,277 @@
+.ls-v6 {
+  .ls-bottom-nav-wrapper {
+    position: absolute;
+    left: 100px;
+    top: 50% !important;
+    transform: translateY(-50%);
+    display: inline-block;
+    height: fit-content;
+  }
+
+  .ls-gui-element.ls-bottom-nav-wrapper a {
+    display: block !important;
+    background-color: $title-color;
+    margin: 18px 0;
+    border-color: transparent !important;
+    transform: translateX(-50%);
+    transition: all ease 0.4s;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.ls-nav-active:hover,
+    &.ls-nav-active {
+      background-color: $theme-color !important;
+    }
+  }
+
+  .ls-btn {
+    .play-btn {
+      --icon-size: 100px;
+      
+      i {
+        font-size: 24px;
+      }
+    }
+  }
+
+
+  a.ls-gui-element.ls-nav-prev,
+  a.ls-gui-element.ls-nav-next {
+    --btn-size: 40px;
+    left: 150px;
+    background-color: $white-color;
+    color: $theme-color;
+    width: var(--btn-size);
+    height: var(--btn-size);
+    line-height: var(--btn-size) !important;
+    right: auto;
+    margin-top: -50px;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    box-shadow: 0px 6px 37px 0px rgba(7, 204, 236, 0.15);
+    transition: all ease 0.4s;
+
+    &:before {
+      content: '\f054';
+      font-family: $icon-font;
+      transition: all ease 0.4s;
+    }
+
+    &:hover {
+      transform: scale(1.3);
+      background-color: $theme-color;
+      color: $white-color;
+    }
+  }
+  
+  a.ls-gui-element.ls-nav-next {
+    margin-top: 10px;    
+
+    &:before {
+      content: '\f053';
+    }
+  }
+  
+  a.ls-gui-element.ls-nav-prev:after,
+  a.ls-gui-element.ls-nav-next:after {
+    display: none;
+  }
+
+
+  &:hover {
+    a.ls-gui-element.ls-nav-prev,
+    a.ls-gui-element.ls-nav-next {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+
+.ls-arrow2,
+.ls-arrow1 {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  line-height: 48px;
+  text-align: center;
+  border: 2px solid rgba(255,255,255,0.5);
+  color: $white-color;
+  background-color: transparent;
+  padding: 0;
+  border-radius: 50%;
+  font-size: 16px;
+  margin-right: 5px;
+
+  &:last-child {
+    margin-right: 0;
+  }
+
+  &:hover {
+    border-color: transparent;
+    background-color: $white-color;
+    color: $title-color;
+  }
+}
+
+.ls-arrow2 {
+  border-color: transparent;
+  background-color: $white-color;
+  color: $title-color;
+  font-size: 18px;
+
+  &:hover {
+    background-color: $theme-color;
+    color: $white-color;
+  }
+}
+
+.ls-custom-dot {
+  width: 7px; 
+  height: 3px;
+  background-color: $white-color;
+  display: inline-block;
+  border: none;
+  margin-right: 6.5px;
+  transition: all ease 0.4s;
+
+  &:hover{
+    background-color: rgba(#fff, 0.5);
+  }
+
+  &.active {
+    width: 120px;
+  }
+
+  &.vertical {
+    height: 7px;
+    width: 3px;
+    display: block;
+    margin-right: 0;
+    margin-bottom: 6.5px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.active {
+      height: 120px;
+    }
+  }
+}
+
+
+.hero-layout5 {
+  margin-top: -42px;
+}
+
+@include xl {
+  .hero-layout5 {
+    margin-top: 0;
+  }
+  
+  .ls-custom-dot {
+    &.active {
+      width: 80px;
+    }
+
+    &.vertical {
+      &.active {
+        height: 80px;
+        width: 3px;
+      }
+    }
+  }
+
+}
+
+
+
+@include lg {
+  .vs-hero-wrapper {
+    .ls-v6 .ls-bottom-nav-wrapper {
+      display: none;
+    }
+
+    a.ls-gui-element.ls-nav-prev,
+    a.ls-gui-element.ls-nav-next {
+      display: none;
+    }
+  }
+
+  .ls-layer,
+  .ls-btn {
+    .vs-btn {
+      padding: 14px 30px 14px 30px;
+      font-size: 14px;
+      margin-left: 0;
+
+      &:before {
+        display: none;
+      }
+
+      i {
+        display: none;
+      }
+    }
+  }
+
+
+ 
+
+  
+
+}
+
+@include md {
+  .ls-container  {
+    .ls-hide-md {
+      display: none !important;
+    }
+  }
+
+   
+  .ls-arrow2,
+  .ls-arrow1 {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 38px;
+    font-size: 14px;
+  }
+
+
+  .ls-v6 .ls-btn .play-btn i {
+    font-size: 16px;
+  }
+}
+
+@include sm {
+  .ls-container {
+    .ls-hide-sm {
+      display: none !important;
+    }
+  }
+  
+  .ls-btn {
+    .vs-btn {
+      padding: 10px 20px 10px 30px;
+    }
+  }
+
+  .ls-layer,
+  .ls-btn {
+    .vs-btn {
+      padding: 12px 23px 12px 23px;
+      font-size: 12px;
+      margin-left: 0;
+    }
+  }
+}

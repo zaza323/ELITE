@@ -1,0 +1,25 @@
+html[dir="rtl"],
+html[dir="rtl"] body {
+  direction: rtl;
+  text-align: right;
+}
+
+html[dir="rtl"] .form-select {
+  background-position: left 0.75rem center;
+  padding-left: 2.25rem;
+  padding-right: 0.75rem;
+}
+
+html[dir="rtl"] .dropdown-menu,
+html[dir="rtl"] .mobile-menu,
+html[dir="rtl"] .widget-area {
+  text-align: right;
+}
+
+html[dir="rtl"] .fa-chevron-right::before {
+  content: "\f053";
+}
+
+html[dir="rtl"] .fa-chevron-left::before {
+  content: "\f054";
+}

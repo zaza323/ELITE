@@ -1,0 +1,107 @@
+/* ============================================= */
+/* == ملف أنماط قسم "من نحن" لمركز ايليت الطبي == */
+/* ==     (css/elite-about.css)               == */
+/* ============================================= */
+
+/* --- المتغيرات الرئيسية للهوية البصرية --- */
+/* !!! استبدل هذه القيم بألوان مركز ايليت الفعلية !!! */
+:root {
+    --elite-primary-color: #0D47A1;  /* مثال: أزرق داكن - اللون الرئيسي */
+    --elite-secondary-color: #1976D2; /* مثال: أزرق أفتح - اللون الثانوي */
+    --elite-text-color: #333333;     /* لون النص الأساسي */
+    --elite-light-text-color: #555555; /* لون النص الأفتح قليلاً */
+}
+
+/* --- أنماط القسم الرئيسية --- */
+.elite-about-section {
+    font-family: 'Cairo', sans-serif; /* تطبيق خط Cairo */
+    font-weight: 400;                 /* الوزن العادي كافتراضي */
+    background-color: #f8f9fa;        /* لون خلفية فاتح (اختياري) */
+    /* يمكنك إضافة padding هنا إذا لم يكن موجوداً في كلاس space */
+    /* padding-top: 80px; */
+    /* padding-bottom: 80px; */
+}
+
+.elite-about-section .about-content {
+    text-align: right; /* محاذاة النص لليمين */
+}
+
+/* --- أنماط العناوين --- */
+.elite-about-section h1,
+.elite-about-section h2,
+.elite-about-section h3,
+.elite-about-section .section-title,
+.elite-about-section .elite-title {
+    font-family: 'Cairo', sans-serif; /* تأكيد الخط للعناوين */
+    font-weight: 700 !important;      /* تطبيق الوزن العريض (700) - جرب !important إذا لزم الأمر */
+    color: var(--elite-primary-color); /* استخدام اللون الرئيسي */
+    margin-bottom: 8px;
+    position: relative;
+    padding-bottom: 5px;
+}
+
+.elite-about-section .elite-text {
+    /* قلل الهامش العلوي للفقرة - جرب قيماً مختلفة (مثلاً 5px أو 0) */
+    margin-top: 5px;
+}
+
+/* خط زخرفي تحت العنوان (اختياري) */
+.elite-about-section .section-title.elite-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0; /* يبدأ من أسفل الحشوة الجديدة */
+    right: 0;
+    width: 60px;
+    height: 3px;
+    background-color: var(--elite-secondary-color); /* استخدام اللون الثانوي */
+}
+
+/* --- أنماط النصوص العادية --- */
+.elite-about-section p,
+.elite-about-section .elite-text,
+.elite-about-section li {
+    font-family: 'Cairo', sans-serif; /* تأكيد الخط للنصوص */
+    font-weight: 400 !important;      /* تأكيد الوزن العادي - جرب !important إذا لزم الأمر */
+    color: var(--elite-text-color);
+    line-height: 1.8;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* --- أنماط الصورة --- */
+.elite-about-section .about-img img.rounded-img {
+    display: block;
+    max-width: 100%;
+    /* !!! عدّل قيمة الـ height لتناسب تصميمك !!! */
+    height: 450px; /* مثال: ارتفاع ثابت (أو استخدم max-height) */
+    object-fit: cover; /* مهم جداً للحفاظ على نسبة الصورة عند تحديد ارتفاع */
+    width: 100%;      /* لتأكيد ملء عرض الحاوية */
+    border-radius: 10px; /* حواف دائرية */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+}
+
+/* --- تعديلات للشاشات الأصغر (اختياري) --- */
+@media (max-width: 991px) {
+    .elite-about-section .about-content {
+        padding-left: 0;
+        padding-right: 0; /* إزالة الحشوة */
+        text-align: center; /* توسيط النص */
+    }
+    .elite-about-section .section-title.elite-title::after {
+       right: 50%;
+       transform: translateX(50%); /* توسيط الخط تحت العنوان */
+    }
+    /* إلغاء ترتيب الأعمدة المحدد للشاشات الكبيرة */
+     .elite-about-section .order-lg-1,
+     .elite-about-section .order-lg-2 {
+        order: 0 !important;
+    }
+    /* إضافة هامش بين الصورة والنص في الشاشات الصغيرة */
+    .elite-about-section .col-lg-6:last-child .about-content {
+        margin-top: 30px;
+    }
+    /* تعديل ارتفاع الصورة للشاشات الصغيرة إذا لزم الأمر */
+    .elite-about-section .about-img img.rounded-img {
+       /* height: 350px; */ /* مثال: ارتفاع أقل للشاشات الصغيرة */
+    }
+}

@@ -1,0 +1,168 @@
+/* Elite Medical Care - small additions on top of the theme (style.css). */
+
+/* Phone numbers always read left-to-right, also on the Arabic version. */
+bdi[dir="ltr"] {
+  direction: ltr;
+  unicode-bidi: isolate;
+  display: inline-block;
+}
+
+/* Floating WhatsApp button */
+.whatsapp-float {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 97;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #25d366;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.whatsapp-float:hover,
+.whatsapp-float:focus {
+  color: #fff;
+  background-color: #1ebe5b;
+  transform: scale(1.08);
+}
+
+@media (max-width: 575px) {
+  .whatsapp-float {
+    left: 16px;
+    bottom: 16px;
+    width: 50px;
+    height: 50px;
+    font-size: 26px;
+  }
+}
+
+/* WhatsApp shortcut next to the phone number in the header */
+.header-call .header-wa {
+  margin-inline-start: 12px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #25d366;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+}
+
+.header-call .header-wa:hover {
+  color: #fff;
+  background-color: #1ebe5b;
+}
+
+/* Contact links in the mobile menu */
+.mobile-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px 0 10px;
+}
+
+.mobile-contact a {
+  color: var(--title-color, #0b1d33);
+  font-weight: 600;
+}
+
+.mobile-contact .wa-link {
+  color: #1ebe5b;
+}
+
+/* Footer contact list */
+.footer-contact {
+  margin: 0;
+  padding: 0;
+}
+
+.footer-contact li {
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.footer-contact i {
+  width: 22px;
+  margin-inline-end: 8px;
+}
+
+.footer-services-menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 30px;
+  padding: 0;
+}
+
+@media (max-width: 420px) {
+  .footer-services-menu {
+    grid-template-columns: 1fr;
+  }
+}
+
+.copyright-text {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+/* Phone + WhatsApp block (home page and contact page) */
+.contact-phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  align-items: center;
+}
+
+.contact-phones a {
+  color: inherit;
+}
+
+.btn-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 30px;
+  background-color: #25d366;
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.btn-whatsapp i {
+  font-size: 22px;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe5b;
+}
+
+.contact-whatsapp {
+  margin-top: 12px;
+}
+
+/* Department pages: second "about" paragraph */
+.service-content .about-text + .about-text {
+  margin-top: -10px;
+}
+
+/* Doctor photos fill their frame (no blank space under shorter photos) */
+.team-img-container .team-img {
+  width: 100%;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center top;
+}
