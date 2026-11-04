@@ -10,6 +10,53 @@
     }
   });
 
+  // All forms: instead of sending an email, open WhatsApp with the details
+  // already written; the visitor only has to press send.
+  var WHATSAPP_NUMBER = "962799901515";
+  var LABELS = {
+    ar: {
+      booking: "طلب حجز موعد - إيليت للرعاية الطبية",
+      contact: "رسالة من موقع إيليت للرعاية الطبية",
+      Service: "الخدمة", Doctor: "الطبيب", "Patient Name": "الاسم", Name: "الاسم",
+      Email: "البريد الإلكتروني", Phone: "رقم الهاتف", "Appointment Date & Time": "موعد الحجز",
+      "Appointment Date and Time": "موعد الحجز", message: "الرسالة"
+    },
+    en: {
+      booking: "Appointment request - Elite Medical Care",
+      contact: "Message from the Elite Medical Care website",
+      Service: "Service", Doctor: "Doctor", "Patient Name": "Name", Name: "Name",
+      Email: "Email", Phone: "Phone", "Appointment Date & Time": "Appointment date & time",
+      "Appointment Date and Time": "Appointment date & time", message: "Message"
+    }
+  };
+
+  document.querySelectorAll('form[action*="formsubmit.co"]').forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var labels = LABELS[window.eliteLanguage === "ar" ? "ar" : "en"];
+      var lines = [labels[form.querySelector('[name="message"]') ? "contact" : "booking"], ""];
+
+      Array.prototype.forEach.call(form.elements, function (field) {
+        if (!field.name || field.type === "hidden" || field.type === "submit" || field.name.charAt(0) === "_") {
+          return;
+        }
+        var value = field.tagName === "SELECT" && field.selectedIndex >= 0 && field.value
+          ? field.options[field.selectedIndex].textContent
+          : field.value;
+        value = (value || "").trim();
+        if (value) {
+          lines.push((labels[field.name] || labels[field.name.charAt(0).toUpperCase() + field.name.slice(1)] || field.name) + ": " + value);
+        }
+      });
+
+      var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(lines.join("\n"));
+      var opened = window.open(url, "_blank", "noopener");
+      if (!opened) {
+        window.location.href = url;
+      }
+    });
+  });
+
   // Booking form: show the doctors of the selected service.
   // Keys are option values of #service-select; names are translation keys.
   var DOCTORS = {
