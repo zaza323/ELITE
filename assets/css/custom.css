@@ -171,6 +171,7 @@ bdi[dir="ltr"] {
 html[dir="rtl"] {
   --title-font: "Cairo", sans-serif;
   --body-font: "Cairo", sans-serif;
+  --subtitle-font: "Cairo", sans-serif;
 }
 
 html[dir="rtl"] body,
