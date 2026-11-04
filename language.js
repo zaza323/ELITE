@@ -20,6 +20,34 @@ document.querySelectorAll(".vs-hero-carousel [data-en][data-ar]").forEach((eleme
   element.textContent = element.dataset[initialLanguage];
 });
 
+// Arabic: move the hero text block to the right side of the slide and give the
+// title, description and button the same width so they share one right edge.
+// The slider is laid out on a 1900px-wide canvas (data-container="1900").
+if (initialLanguage === "ar") {
+  const CANVAS = 1900;
+  const WIDTHS = { style: 700, "data-ls-laptop": 800, "data-ls-tablet": 1000, "data-ls-mobile": 1700 };
+  const mirror = (css, width) => {
+    const match = /(^|;)\s*left:\s*(-?\d+)px/.exec(css || "");
+    if (!match) return css;
+    const left = parseInt(match[2], 10);
+    const cleaned = css.replace(/(^|;)\s*(left|width|text-align):[^;]*/g, "$1");
+    return `${cleaned}; left: ${CANVAS - left - width}px; width: ${width}px; text-align: right;`.replace(/;\s*;/g, ";");
+  };
+  // Arabic letters are taller: push the lines under the first title down a bit.
+  const shiftTop = (css, by) => (css || "").replace(/(^|;)\s*top:\s*(-?\d+)px/, (m, sep, top) => `${sep} top: ${parseInt(top, 10) + by}px`);
+  document.querySelectorAll(".vs-hero-carousel .ls-l").forEach((layer) => {
+    const shift = layer.classList.contains("hero-title-secondary") ? 30
+      : (layer.classList.contains("hero-description") || layer.classList.contains("ls-btn")) ? 50 : 0;
+    Object.entries(WIDTHS).forEach(([attribute, width]) => {
+      if (layer.hasAttribute(attribute)) {
+        let css = mirror(layer.getAttribute(attribute), width);
+        if (shift && attribute !== "data-ls-mobile") css = shiftTop(css, shift);
+        layer.setAttribute(attribute, css);
+      }
+    });
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const supportedLanguages = new Set(["en", "ar"]);
   const ICON_TAGS = new Set(["I", "IMG", "SVG", "BR"]);

@@ -166,3 +166,21 @@ bdi[dir="ltr"] {
   object-fit: cover;
   object-position: center top;
 }
+
+/* Arabic version: one font (Cairo) across the whole site, including the slider */
+html[dir="rtl"] {
+  --title-font: "Cairo", sans-serif;
+  --body-font: "Cairo", sans-serif;
+}
+
+html[dir="rtl"] body,
+html[dir="rtl"] .vs-hero-wrapper .hero-title,
+html[dir="rtl"] .vs-hero-wrapper .hero-description,
+html[dir="rtl"] .vs-hero-wrapper .vs-btn {
+  font-family: "Cairo", sans-serif !important;
+}
+
+html[dir="rtl"] .vs-hero-wrapper .hero-title {
+  font-weight: 800 !important;
+  line-height: 1.3 !important;
+}
