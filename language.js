@@ -144,17 +144,35 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Each language file is downloaded once and kept in memory.
+  const translationFiles = {};
+  function loadTranslations(language) {
+    if (!translationFiles[language]) {
+      translationFiles[language] = fetch(`languages/${language}.json`).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Unable to load languages/${language}.json`);
+        }
+        return response.json();
+      });
+      translationFiles[language].catch(() => delete translationFiles[language]);
+    }
+    return translationFiles[language];
+  }
+
+  // Only the most recent choice counts: if an earlier language file arrives
+  // late (slow connection), it must not overwrite the language just picked.
+  let latestRequest = 0;
+
   async function setLanguage(requestedLanguage) {
     const language = supportedLanguages.has(requestedLanguage) ? requestedLanguage : "en";
-    setDirection(language);
+    const request = ++latestRequest;
 
     try {
-      const response = await fetch(`languages/${language}.json`);
-      if (!response.ok) {
-        throw new Error(`Unable to load languages/${language}.json`);
+      const translations = await loadTranslations(language);
+      if (request !== latestRequest) {
+        return;
       }
-
-      const translations = await response.json();
+      setDirection(language);
       applyTranslations(translations);
       saveLanguage(language);
       window.eliteLanguage = language;
@@ -162,7 +180,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.dispatchEvent(new CustomEvent("elite:languagechange", { detail: { language, translations } }));
     } catch (error) {
       console.error("Error loading language file:", error);
-      if (language !== "en") {
+      if (language !== "en" && request === latestRequest) {
         await setLanguage("en");
       }
     }
@@ -181,9 +199,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      // Close the mobile menu so the translated page is visible right away.
+      const mobileMenu = option.closest(".vs-menu-wrapper");
+      if (mobileMenu) {
+        mobileMenu.classList.remove("vs-body-visible");
+      }
+
       setLanguage(language);
     });
   });
 
-  setLanguage(initialLanguage);
+  // Set the direction straight away (no waiting for the text file), then
+  // fetch the other language in the background so switching is instant.
+  setDirection(initialLanguage);
+  setLanguage(initialLanguage).then(() => {
+    loadTranslations(initialLanguage === "ar" ? "en" : "ar").catch(() => {});
+  });
 });
